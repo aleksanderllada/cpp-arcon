@@ -1,0 +1,10 @@
+[generators]
+cmake
+
+[requires]
+Poco/1.9.0@pocoproject/stable
+
+[options]
+Poco:enable_data_odbc=True
+
+[imports]
