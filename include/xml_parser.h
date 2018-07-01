@@ -12,6 +12,9 @@ using Poco::XML::Node;
 
 #include "string.h"
 
+/**
+ * The XMLParser class is responsible for parsing a provided XML into the model.
+ */
 class XMLParser {
 private:
     string filename;
@@ -28,8 +31,20 @@ protected:
     std::vector<AuthResult> parseAuthResults(Node* pNode);
 
 public:
+    /**
+     * Creates a XMLParser object.
+     * @param filename The XML file which this object references.
+     */
     XMLParser(string filename);
+
+    /**
+     * Attempts to parse the provided XML file. Throws an exception if it isn't able to do so.
+     */
     Feedback parse();
+
+    /**
+     * Returns the raw data of the XML file.
+     */
     string getRawXML();
 };
 

@@ -3,7 +3,12 @@
 
 #include <string>
 
+/**
+ * Defines the Database scheme.
+ */
 std::string db_scheme = R"(
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE IF NOT EXISTS Feedback (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     org_name VARCHAR(200),
@@ -26,13 +31,15 @@ CREATE TABLE IF NOT EXISTS PolicyPublished (
     aspf VARCHAR(200),
     p VARCHAR(200),
     sp VARCHAR(200),
-    pct VARCHAR(200)
+    pct VARCHAR(200),
+    FOREIGN KEY(feedback_id) REFERENCES Feedback(id)
 );
 
 CREATE TABLE IF NOT EXISTS Record (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     feedback_id INTEGER,
-    header_from VARCHAR(200)
+    header_from VARCHAR(200),
+    FOREIGN KEY(feedback_id) REFERENCES Feedback(id)
 );
 
 CREATE TABLE IF NOT EXISTS Row (
@@ -40,14 +47,16 @@ CREATE TABLE IF NOT EXISTS Row (
     source_ip VARCHAR(45),
     disposition VARCHAR(200),
     dkim VARCHAR(200),
-    spf VARCHAR(200)
+    spf VARCHAR(200),
+    FOREIGN KEY(record_id) REFERENCES Record(id)
 );
 
 CREATE TABLE IF NOT EXISTS AuthResult (
     record_id INTEGER,
     domain VARCHAR(45),
     result VARCHAR(200),
-    type VARCHAR(10)
+    type VARCHAR(10),
+    FOREIGN KEY(record_id) REFERENCES Record(id)
 );
 )";
 

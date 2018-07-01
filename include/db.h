@@ -11,6 +11,9 @@ using std::string;
 
 enum DBType { SQLite, ODBC, MySQL };
 
+/**
+ * The DB class abstracts the database connection. It allows you to write the model, instead of executing SQL statements.
+ */
 class DB {
 private:
     DBType type;

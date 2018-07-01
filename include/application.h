@@ -6,6 +6,9 @@
 
 using namespace std;
 
+/**
+ * The Application class is a singleton class which is responsible for running the application's main loop.
+ */
 class Application {
 // This is a singleton class. The user must use the builder method.
 private:
@@ -14,8 +17,15 @@ private:
 public:
     static Application& get();
 
-    int run(int argc, char** argv);
+    /**
+     * Starts the application mainloop with the given arguments.
+     */
     int run(vector<string> args);
+
+    /**
+     * Overloaded function for receiving C-styled parameters.
+     */
+    int run(int argc, char** argv);
 };
 
 #endif
