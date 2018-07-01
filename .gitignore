@@ -2,3 +2,4 @@
 *.db
 CMakeFiles/
 bin/
+conanbuildinfo.txt
