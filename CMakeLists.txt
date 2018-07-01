@@ -20,4 +20,4 @@ include_directories(include)
 file(GLOB SOURCES "src/*.cpp")
 
 add_executable(main ${SOURCES})
-target_link_libraries(main PocoFoundation PocoDataODBC PocoDataSQLite PocoZip PocoXML PocoJSON ${CONAN_LIBS})
+target_link_libraries(main PocoFoundation PocoData PocoDataSQLite PocoDataODBC PocoZip PocoXML PocoJSON ${CONAN_LIBS})

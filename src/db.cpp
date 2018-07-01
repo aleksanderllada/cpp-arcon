@@ -59,12 +59,12 @@ void DB::write(Feedback& feedback) {
     // Insert Feedback object
     statement = "INSERT INTO Feedback(org_name, email, extra_contact_info, report_id, data_begin, data_end) VALUES(?, ?, ?, ?, ?, ?);";
     insert << statement,
-        use(feedback.orgname),
-        use(feedback.email),
-        use(feedback.extra_contact_info),
-        use(feedback.report_id),
-        use(feedback.data_begin),
-        use(feedback.data_end);
+        use(feedback.report_metadata.org_name),
+        use(feedback.report_metadata.email),
+        use(feedback.report_metadata.extra_contact_info),
+        use(feedback.report_metadata.report_id),
+        use(feedback.report_metadata.data_range.begin),
+        use(feedback.report_metadata.data_range.end);
     try {
         insert.execute();
     } catch (Exception& e) {
@@ -103,7 +103,7 @@ void DB::write(Feedback& feedback) {
         statement = "INSERT INTO Record(feedback_id, header_from) VALUES(?, ?);";
         insert << statement,
             use(record->feedback_id),
-            use(record->header_from);
+            use(record->identifier.header_from);
         try {
             insert.execute();
         } catch (Exception& e) {
@@ -121,9 +121,9 @@ void DB::write(Feedback& feedback) {
             insert << statement,
                 use(row->record_id),
                 use(row->source_ip),
-                use(row->disposition),
-                use(row->dkim),
-                use(row->spf);
+                use(row->policy_evaluated.disposition),
+                use(row->policy_evaluated.dkim),
+                use(row->policy_evaluated.spf);
             try {
                 insert.execute();
             } catch (Exception& e) {
@@ -150,5 +150,23 @@ void DB::write(Feedback& feedback) {
                 return;
             }
         }
+    }
+}
+
+
+void DB::writeRawXML(string data) {
+    Session session(getConnectorName(), name);
+    Statement insert(session);
+    string statement;
+
+    // Insert Feedback object
+    statement = "INSERT INTO RawXML(document) VALUES(?);";
+    insert << statement,
+        use(data);
+    try {
+        insert.execute();
+    } catch (Exception& e) {
+        cout << "Failed to execute " << statement << ": " << e.displayText() << endl;
+        return;
     }
 }

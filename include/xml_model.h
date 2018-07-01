@@ -2,7 +2,7 @@
 #define XML_MODEL_H
 
 #include <string>
-#include <list>
+#include <vector>
 using std::string;
 
 struct AuthResult {
@@ -12,21 +12,30 @@ struct AuthResult {
     string type;
 };
 
-struct Row {
-    int record_id;
-    string source_ip;
+struct PolicyEvaluated {
     string disposition;
     string dkim;
     string spf;
 };
 
+struct Row {
+    int record_id;
+    string source_ip;
+    int count;
+    PolicyEvaluated policy_evaluated; // Might be std::vector
+};
+
+struct Identifier {
+    string header_from;
+};
+
 struct Record {
     int id;
     int feedback_id;
-    string header_from;
+    Identifier identifier; // Might be std::vector
 
-    std::list<Row> rows;
-    std::list<AuthResult> auth_results;
+    std::vector<Row> rows;
+    std::vector<AuthResult> auth_results;
 };
 
 struct PolicyPublished {
@@ -39,17 +48,25 @@ struct PolicyPublished {
     double pct;
 };
 
-struct Feedback {
-    int id;
-    string orgname;
+struct DataRange {
+    int begin;
+    int end;
+};
+
+struct ReportMetadata {
+    string org_name;
     string email;
     string extra_contact_info;
     string report_id;
-    int data_begin;
-    int data_end;
+    DataRange data_range;
+};
 
-    std::list<PolicyPublished> policies_published;
-    std::list<Record> records;
+struct Feedback {
+    int id;
+    ReportMetadata report_metadata; // Might be std::vector
+
+    std::vector<PolicyPublished> policies_published;
+    std::vector<Record> records;
 };
 
 #endif

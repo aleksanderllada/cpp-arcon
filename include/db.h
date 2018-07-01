@@ -36,6 +36,12 @@ public:
      * Writes a Feedback structure to the database.
      */
     void write(Feedback& feedback);
+
+    /**
+     * Writes a raw XML file into the RawXML table.
+     * @param data The XML file to be written.
+     */
+    void writeRawXML(string data);
 };
 
 #endif
