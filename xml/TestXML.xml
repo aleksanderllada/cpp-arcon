@@ -1,45 +1,215 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml
+version="1.0"?>
 <feedback>
-  <report_metadata>
-    <org_name>emailsrvr.com</org_name>
-    <email>dmarc_reports@emailsrvr.com</email>
-    <extra_contact_info>http://emailsrvr.com</extra_contact_info>
-    <report_id>8098bbb4-0ce7-4203-88c0-072acb2f0765</report_id>
-    <date_range>
-      <begin>1526860800</begin>
-      <end>1526947200</end>
-    </date_range>
-  </report_metadata>
-  <policy_published>
-    <domain>Test.com</domain>
-    <adkim>r</adkim>
-    <aspf>r</aspf>
-    <p>none</p>
-    <sp>none</sp>
-    <pct>100</pct>
-  </policy_published>
-  <record>
-   <row>
-     <source_ip>100.137.237.121</source_ip>
-     <count>1</count>
-     <policy_evaluated>
-       <disposition>none</disposition>
-       <dkim>fail</dkim>
-       <spf>fail</spf>
-     </policy_evaluated>
-   </row>
-   <identifiers>
-     <header_from>Test.com</header_from>
-   </identifiers>
-   <auth_results>
-     <spf>
-       <domain>Test.com</domain>
-       <result>neutral</result>
-     </spf>
-     <dkim>
-       <domain>rediffmailpro.com</domain>
-       <result>pass</result>
-     </dkim>
-   </auth_results>
-  </record>
+<report_metadata>
+<org_name>Yahoo!
+Inc.</org_name>
+<email>postmaster@dmarc.yahoo.com</email>
+<report_id>1530320727.215045</report_id>
+<date_range>
+<begin>1530230400</begin>
+<end>1530316799
+</end>
+</date_range>
+</report_metadata>
+<policy_published>
+<domain>anbglobal.com</domain>
+<adkim>r</adkim>
+<aspf>r</aspf>
+<p>none</p>
+<pct>100</pct>
+</policy_published>
+<record>
+<row>
+<source_ip>202.137.236.134</source_ip>
+<count>1</count>
+<policy_evaluated>
+<disposition>none</disposition>
+<dkim>fail</dkim>
+<spf>fail</spf>
+</policy_evaluated>
+</row>
+<identifiers>
+<header_from>anbglobal.com</header_from>
+</identifiers>
+<auth_results>
+<dkim>
+<domain>rediffmailpro.com</domain>
+<result>pass</result>
+</dkim>
+<spf>
+<domain>anbglobal.com</domain>
+<result>none</result>
+</spf>
+</auth_results>
+</record>
+<record>
+<row>
+<source_ip>202.137.236.136</source_ip>
+<count>2</count>
+<policy_evaluated>
+<disposition>none</disposition>
+<dkim>fail</dkim>
+<spf>fail</spf>
+</policy_evaluated>
+</row>
+<identifiers>
+<header_from>anbglobal.com</header_from>
+</identifiers>
+<auth_results>
+<dkim>
+<domain>rediffmailpro.com</domain>
+<result>pass</result>
+</dkim>
+<spf>
+<domain>anbglobal.com</domain>
+<result>none</result>
+</spf>
+</auth_results>
+</record>
+<record>
+<row>
+<source_ip>202.137.236.138</source_ip>
+<count>1</count>
+<policy_evaluated>
+<disposition>none</disposition>
+<dkim>fail</dkim>
+<spf>fail</spf>
+</policy_evaluated>
+</row>
+<identifiers>
+<header_from>anbglobal.com</header_from>
+</identifiers>
+<auth_results>
+<dkim>
+<domain>rediffmailpro.com</domain>
+<result>pass</result>
+</dkim>
+<spf>
+<domain>anbglobal.com</domain>
+<result>none</result>
+</spf>
+</auth_results>
+</record>
+<record>
+<row>
+<source_ip>202.137.236.176</source_ip>
+<count>1</count>
+<policy_evaluated>
+<disposition>none</disposition>
+<dkim>fail</dkim>
+<spf>fail</spf>
+</policy_evaluated>
+</row>
+<identifiers>
+<header_from>anbglobal.com</header_from>
+</identifiers>
+<auth_results>
+<dkim>
+<domain>rediffmailpro.com</domain>
+<result>pass</result>
+</dkim>
+<spf>
+<domain>anbglobal.com</domain>
+<result>none</result>
+</spf>
+</auth_results>
+</record>
+<record>
+<row>
+<source_ip>202.137.236.204</source_ip>
+<count>1</count>
+<policy_evaluated>
+<disposition>none</disposition>
+<dkim>fail</dkim>
+<spf>fail</spf>
+</policy_evaluated>
+</row>
+<identifiers>
+<header_from>anbglobal.com</header_from>
+</identifiers>
+<auth_results>
+<dkim>
+<domain>rediffmailpro.com</domain>
+<result>pass</result>
+</dkim>
+<spf>
+<domain>anbglobal.com</domain>
+<result>none</result>
+</spf>
+</auth_results>
+</record>
+<record>
+<row>
+<source_ip>202.137.236.212</source_ip>
+<count>1</count>
+<policy_evaluated>
+<disposition>none</disposition>
+<dkim>fail</dkim>
+<spf>fail</spf>
+</policy_evaluated>
+</row>
+<identifiers>
+<header_from>anbglobal.com</header_from>
+</identifiers>
+<auth_results>
+<dkim>
+<domain>rediffmailpro.com</domain>
+<result>pass</result>
+</dkim>
+<spf>
+<domain>anbglobal.com</domain>
+<result>none</result>
+</spf>
+</auth_results>
+</record>
+<record>
+<row>
+<source_ip>202.137.237.130</source_ip>
+<count>2</count>
+<policy_evaluated>
+<disposition>none</disposition>
+<dkim>fail</dkim>
+<spf>fail</spf>
+</policy_evaluated>
+</row>
+<identifiers>
+<header_from>anbglobal.com</header_from>
+</identifiers>
+<auth_results>
+<dkim>
+<domain>rediffmailpro.com</domain>
+<result>pass</result>
+</dkim>
+<spf>
+<domain>anbglobal.com</domain>
+<result>none</result>
+</spf>
+</auth_results>
+</record>
+<record>
+<row>
+<source_ip>202.137.237.240</source_ip>
+<count>1</count>
+<policy_evaluated>
+<disposition>none</disposition>
+<dkim>fail</dkim>
+<spf>fail</spf>
+</policy_evaluated>
+</row>
+<identifiers>
+<header_from>anbglobal.com</header_from>
+</identifiers>
+<auth_results>
+<dkim>
+<domain>rediffmailpro.com</domain>
+<result>pass</result>
+</dkim>
+<spf>
+<domain>anbglobal.com</domain>
+<result>none</result>
+</spf>
+</auth_results>
+</record>
 </feedback>
+

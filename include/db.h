@@ -22,6 +22,13 @@ private:
     string getConnectorName();
     int getLastInsertId(Session &st);
 
+protected:
+    void writeFeedback(Session& session, Feedback& feedback);
+    void writePolicyPublished(Session& session, PolicyPublished& policy_published);
+    void writeRecord(Session& session, Record& record);
+    void writeRow(Session& session, Row& row);
+    void writeAuthResult(Session& session, AuthResult& auth_result);
+
 public:
     /**
      * Constructs a new DB object.

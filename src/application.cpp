@@ -2,7 +2,7 @@
 #include "db.h"
 #include "xml_parser.h"
 #include "xml_model.h"
-#include "zip.h"
+#include "decompress.h"
 
 #include <iostream>
 
@@ -27,7 +27,7 @@ int Application::run(vector<string> args) {
     // TODO: fetch the zip file from the e-mail
     
     // Unzip the XML file
-    Zip::unzip("zip/TestXML.zip", "./xml");
+    Decompress::gz("gz/yahoo.com!anbglobal.com!1530230400!1530316799.xml.gz", "xml/TestXML.xml");
 
     // Parse it into the Feedback model
     XMLParser parser("xml/TestXML.xml");

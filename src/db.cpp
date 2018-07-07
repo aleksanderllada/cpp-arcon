@@ -51,8 +51,7 @@ int DB::getLastInsertId(Session& session) {
     return lastInsertId;
 }
 
-void DB::write(Feedback& feedback) {
-    Session session(getConnectorName(), name);
+void DB::writeFeedback(Session& session, Feedback& feedback) {
     Statement insert(session);
     string statement;
 
@@ -75,84 +74,108 @@ void DB::write(Feedback& feedback) {
 
     // Insert PolicyPublished objects
     for (auto pp = feedback.policies_published.begin(); pp != feedback.policies_published.end(); ++pp) {
-        insert.reset(session);
-
         pp->feedback_id = feedback.id;
-        statement = "INSERT INTO PolicyPublished(feedback_id, domain, adkim, aspf, p, sp, pct) VALUES(?, ?, ?, ?, ?, ?, ?);";
-        insert << statement,
-            use(pp->feedback_id),
-            use(pp->domain),
-            use(pp->adkim),
-            use(pp->aspf),
-            use(pp->p),
-            use(pp->sp),
-            use(pp->pct);
-        try {
-            insert.execute();
-        } catch (Exception& e) {
-            cout << "Failed to execute " << statement << ": " << e.displayText() << endl;
-            return;
-        }
+        writePolicyPublished(session, (*pp));
     }
 
     // Insert Record objects
     for (auto record = feedback.records.begin(); record != feedback.records.end(); ++record) {
-        insert.reset(session);
-
         record->feedback_id = feedback.id;
-        statement = "INSERT INTO Record(feedback_id, header_from) VALUES(?, ?);";
-        insert << statement,
-            use(record->feedback_id),
-            use(record->identifier.header_from);
-        try {
-            insert.execute();
-        } catch (Exception& e) {
-            cout << "Failed to execute " << statement << ": " << e.displayText() << endl;
-            return;
-        }
-        record->id = getLastInsertId(session);
-
-        // Insert Row objects
-        for (auto row = record->rows.begin(); row != record->rows.end(); ++row) {
-            insert.reset(session);
-
-            row->record_id = record->id;
-            statement = "INSERT INTO Row(record_id, source_ip, disposition, dkim, spf) VALUES(?, ?, ?, ?, ?);";
-            insert << statement,
-                use(row->record_id),
-                use(row->source_ip),
-                use(row->policy_evaluated.disposition),
-                use(row->policy_evaluated.dkim),
-                use(row->policy_evaluated.spf);
-            try {
-                insert.execute();
-            } catch (Exception& e) {
-                cout << "Failed to execute " << statement << ": " << e.displayText() << endl;
-                return;
-            }
-        }
-
-        // Insert AuthResult objects
-        for (auto ar = record->auth_results.begin(); ar != record->auth_results.end(); ++ar) {
-            insert.reset(session);
-
-            ar->record_id = record->id;
-            statement = "INSERT INTO AuthResult(record_id, domain, result, type) VALUES(?, ?, ?, ?);";
-            insert << statement,
-                use(ar->record_id),
-                use(ar->domain),
-                use(ar->result),
-                use(ar->type);
-            try {
-                insert.execute();
-            } catch (Exception& e) {
-                cout << "Failed to execute " << statement << ": " << e.displayText() << endl;
-                return;
-            }
-        }
+        writeRecord(session, (*record));
     }
 }
 
+void DB::writePolicyPublished(Session& session, PolicyPublished& policy_published) {
+    Statement insert(session);
+    string statement;
+
+    statement = "INSERT INTO PolicyPublished(feedback_id, domain, adkim, aspf, p, sp, pct) VALUES(?, ?, ?, ?, ?, ?, ?);";
+    insert << statement,
+        use(policy_published.feedback_id),
+        use(policy_published.domain),
+        use(policy_published.adkim),
+        use(policy_published.aspf),
+        use(policy_published.p),
+        use(policy_published.sp),
+        use(policy_published.pct);
+    try {
+        insert.execute();
+    } catch (Exception& e) {
+        cout << "Failed to execute " << statement << ": " << e.displayText() << endl;
+        return;
+    }
+}
+
+void DB::writeRecord(Session& session, Record& record) {
+    Statement insert(session);
+    string statement;
+
+    statement = "INSERT INTO Record(feedback_id, header_from) VALUES(?, ?);";
+    insert << statement,
+        use(record.feedback_id),
+        use(record.identifier.header_from);
+    try {
+        insert.execute();
+    } catch (Exception& e) {
+        cout << "Failed to execute " << statement << ": " << e.displayText() << endl;
+        return;
+    }
+    record.id = getLastInsertId(session);
+
+    // Insert Row objects
+    for (auto row = record.rows.begin(); row != record.rows.end(); ++row) {
+        row->record_id = record.id;
+        writeRow(session, (*row));
+    }
+
+    // Insert AuthResult objects
+    for (auto ar = record.auth_results.begin(); ar != record.auth_results.end(); ++ar) {
+        ar->record_id = record.id;
+        writeAuthResult(session, (*ar));
+    }
+}
+
+void DB::writeRow(Session& session, Row& row) {
+    Statement insert(session);
+    string statement;
+
+    statement = "INSERT INTO Row(record_id, source_ip, disposition, dkim, spf) VALUES(?, ?, ?, ?, ?);";
+    insert << statement,
+        use(row.record_id),
+        use(row.source_ip),
+        use(row.policy_evaluated.disposition),
+        use(row.policy_evaluated.dkim),
+        use(row.policy_evaluated.spf);
+    try {
+        insert.execute();
+    } catch (Exception& e) {
+        cout << "Failed to execute " << statement << ": " << e.displayText() << endl;
+        return;
+    }
+}
+
+void DB::writeAuthResult(Session& session, AuthResult& auth_result) {
+    Statement insert(session);
+    string statement;
+
+    statement = "INSERT INTO AuthResult(record_id, domain, result, type) VALUES(?, ?, ?, ?);";
+    insert << statement,
+        use(auth_result.record_id),
+        use(auth_result.domain),
+        use(auth_result.result),
+        use(auth_result.type);
+    try {
+        insert.execute();
+    } catch (Exception& e) {
+        cout << "Failed to execute " << statement << ": " << e.displayText() << endl;
+        return;
+    }
+}
+
+void DB::write(Feedback& feedback) {
+    Session session(getConnectorName(), name);
+    writeFeedback(session, feedback);
+}
 
 void DB::writeRawXML(string data) {
     Session session(getConnectorName(), name);

@@ -7,10 +7,10 @@ using std::string;
 /**
  * Static class for unzipping files.
  */
-class Zip {
+class Decompress {
 private:
     // This is a static class, it shouldn't be instantiated.
-    Zip() {};
+    Decompress() {};
 
 public:
     /**
@@ -19,7 +19,7 @@ public:
      * @param outputDir {The output directory to which the files will be decompressed.
      * Attempts to create the directory if it doesn't exist.}
      */
-    static void unzip(string filename, string outputDir = "./output");
+    static void gz(string filename, string output);
 };
 
 #endif
