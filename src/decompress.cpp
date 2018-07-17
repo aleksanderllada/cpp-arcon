@@ -8,26 +8,30 @@
 #include <exception>
 #include <iostream>
 
+using Poco::File;
 using Poco::InflatingInputStream;
 using Poco::InflatingStreamBuf;
 using namespace std;
 
-void Decompress::gz(string filename, string output) {
-    ifstream in(filename, ios::binary);
-
+void Decompress::gz(istream& stream, string filename) {
+    File f("xml/");
+    f.createDirectory();
+    
     // Decompress into the directory.
+    cout << "Inflating " << filename << endl;
+
     string data, xml;
-    InflatingInputStream inflater(in, InflatingStreamBuf::STREAM_GZIP);
+    InflatingInputStream inflater(stream, InflatingStreamBuf::STREAM_GZIP);
     do {
         data.clear();
         inflater >> data;
         xml += data + '\n';
     } while (data.length());
 
-    ofstream out(output);
+    ofstream out(filename);
 
     if (!out.is_open()) {
-        cout << "Could not open the output file." << endl;
+        cout << "Decompress::gz: Could not open the output file." << endl;
         return;
     }
 

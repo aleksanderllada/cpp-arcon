@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>500</width>
+    <height>400</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>cpp-arcon-gui</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="9" column="0" colspan="3">
+     <layout class="QVBoxLayout" name="verticalLayout_2"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="pop3ServerLabel">
+      <property name="maximumSize">
+       <size>
+        <width>90</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>POP3 Server</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1" colspan="2">
+     <widget class="QLineEdit" name="dbUrlField"/>
+    </item>
+    <item row="3" column="1" colspan="2">
+     <widget class="QLineEdit" name="emailField"/>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="emailLabel">
+      <property name="maximumSize">
+       <size>
+        <width>90</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>E-mail</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="passwordLabel">
+      <property name="maximumSize">
+       <size>
+        <width>90</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Password</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="2">
+     <widget class="QPushButton" name="runButton">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Run</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" colspan="2">
+     <widget class="QLineEdit" name="pop3ServerField"/>
+    </item>
+    <item row="6" column="0" colspan="2">
+     <layout class="QHBoxLayout" name="horizontalLayout"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="binaryFIleLabel">
+      <property name="text">
+       <string>Binary File</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="dbUrlLabel">
+      <property name="maximumSize">
+       <size>
+        <width>90</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Database URL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1" colspan="2">
+     <widget class="QLineEdit" name="passwordField"/>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="binaryFileField">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QPushButton" name="binaryFileBrowseButton">
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0" colspan="3">
+     <widget class="QPlainTextEdit" name="outputTextEdit"/>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLabel" name="outputLabel">
+      <property name="text">
+       <string>Output</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>binaryFileField</tabstop>
+  <tabstop>binaryFileBrowseButton</tabstop>
+  <tabstop>dbUrlField</tabstop>
+  <tabstop>pop3ServerField</tabstop>
+  <tabstop>emailField</tabstop>
+  <tabstop>passwordField</tabstop>
+  <tabstop>runButton</tabstop>
+  <tabstop>outputTextEdit</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

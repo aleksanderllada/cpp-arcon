@@ -2,7 +2,9 @@
 #define ZIP_H
 
 #include <string>
+#include <istream>
 using std::string;
+using std::istream;
 
 /**
  * Static class for unzipping files.
@@ -19,7 +21,7 @@ public:
      * @param outputDir {The output directory to which the files will be decompressed.
      * Attempts to create the directory if it doesn't exist.}
      */
-    static void gz(string filename, string output);
+    static void gz(istream& stream, string filename);
 };
 
 #endif
