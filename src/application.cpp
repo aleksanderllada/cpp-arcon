@@ -23,7 +23,7 @@ int Application::run(int argc, char** argv) {
         args.push_back(string(argv[i]));
     }
 
-    run(args);
+    return run(args);
 }
 
 int Application::run(vector<string> args) {
