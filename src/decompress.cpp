@@ -3,6 +3,7 @@
 #include "Poco/Path.h"
 #include "Poco/InflatingStream.h"
 #include "Poco/File.h"
+#include "Poco/Zip/Decompress.h"
 
 #include <fstream>
 #include <exception>
@@ -37,4 +38,9 @@ void Decompress::gz(istream& stream, string filename) {
 
     out << xml;
     out.close();
+}
+
+void Decompress::zip(istream& stream, string filename) {
+    Poco::Zip::Decompress dec(stream, filename);
+    dec.decompressAllFiles();
 }

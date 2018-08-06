@@ -38,7 +38,13 @@ vector<string> POP3Client::fetchMessages() {
 
         // Find which part of the message contains the application/gzip content.
         for(auto partIt = msg.parts().begin(); partIt != msg.parts().end(); ++partIt) {
-            if (partIt->pSource->mediaType().find("application/gzip") != string::npos) {
+            string applicationType;
+            if (partIt->pSource->mediaType().find("application/gzip") != string::npos)
+                applicationType = "gzip";
+            else if (partIt->pSource->mediaType().find("application/gzip") != string::npos)
+                applicationType = "zip";
+
+            if (!applicationType.empty()) {
                 // Format the filename
                 string filename = partIt->pSource->filename();
                 filename.erase(remove(filename.begin(), filename.end(), '"'), filename.end());
@@ -46,7 +52,11 @@ vector<string> POP3Client::fetchMessages() {
                 filename = "xml/" + filename;
 
                 // Decompress it and push the data into a file
-                Decompress::gz(partIt->pSource->stream(), filename);
+                if (applicationType == "gzip")
+                    Decompress::gz(partIt->pSource->stream(), filename);
+                else
+                    Decompress::zip(partIt->pSource->stream(), filename);
+
                 messages.push_back(filename);
             }
         }

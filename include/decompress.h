@@ -16,12 +16,18 @@ private:
 
 public:
     /**
-     * Unzips a compressed file into a directory.
-     * @param filename The name of the zip file.
-     * @param outputDir {The output directory to which the files will be decompressed.
-     * Attempts to create the directory if it doesn't exist.}
+     * Unzips a compressed gzip file into a directory.
+     * @param stream The open stream for reading the file.
+     * @param filename The name of the gzip file.
      */
     static void gz(istream& stream, string filename);
+
+    /**
+     * Unzips a compressed zip file into a directory.
+     * @param stream The open stream for reading the file.
+     * @param filename The name of the gzip file.
+     */
+    static void zip(istream& stream, string filename);
 };
 
 #endif
